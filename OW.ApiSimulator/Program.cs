@@ -24,6 +24,7 @@ namespace OW.ApiSimulator
                  {
                      webBuilder
                      .UseStartup<Startup>()
+                     .UseSentry(opt => opt.Environment = configuration["Env"])
                      .UseUrls($"http://0.0.0.0:{configuration["HostingPort"]}");
                  });
         }
