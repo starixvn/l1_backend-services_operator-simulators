@@ -473,17 +473,14 @@ namespace OW.ApiSimulator.Controllers
             var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId && x.SiteId == request.SiteId);
             result.Seq = request.Seq;
             result.ErrorCode = customer?.ErrorCode.Award ?? result.ErrorCode;
-            if (result.ErrorCode == 0 && customer != null)
+            if (result.ErrorCode == 0)
             {
                 result.PlayerId = request.PlayerId;
-                customer.Balance += request.Amount;
+                result.ErrorDescription = "Success";
             }
-
-            if(customer == null)
+            else
             {
-                result.ErrorCode = 1000;
-                result.ErrorDescription = $"Cannot find player {request.PlayerId}";
-                sentryClient.CaptureMessage($"Api Award Simulator for Partner {@operator} cannot find {request.PlayerId}", Sentry.Protocol.SentryLevel.Warning);
+                result.ErrorDescription = "Unspecified Error";
             }
 
             sentryClient.CaptureMessage($"Api Award Simulator for Partner {@operator} player id: {request.PlayerId}", Sentry.Protocol.SentryLevel.Warning);
