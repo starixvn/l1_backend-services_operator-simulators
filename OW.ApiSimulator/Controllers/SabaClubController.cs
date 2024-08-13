@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OW.ApiSimulator._Shared;
 using OW.ApiSimulator.Models;
 using OW.ApiSimulator.Models.OW;
+using Sentry;
 
 namespace OW.ApiSimulator.Controllers
 {
@@ -17,11 +18,13 @@ namespace OW.ApiSimulator.Controllers
         private const string SC1 = "SC1";
         private readonly IServiceProvider serviceProvider;
         private readonly IAppSettings appSettings;
+        private readonly ISentryClient sentryClient;
 
-        public SabaClubController(IServiceProvider serviceProvider, IAppSettings appSettings)
+        public SabaClubController(IServiceProvider serviceProvider, IAppSettings appSettings, ISentryClient sentryClient)
         {
             this.serviceProvider = serviceProvider;
             this.appSettings = appSettings;
+            this.sentryClient = sentryClient;
         }
 
         [HttpGet]
@@ -396,6 +399,7 @@ namespace OW.ApiSimulator.Controllers
             selectedOperator.CheckMaintenanceResult = model.CheckMaintenanceResult;
             selectedOperator.GetBetLimitResult = model.GetBetLimitResult;
             selectedOperator.HitJackpotResult = model.HitJackpotResult;
+            selectedOperator.AwardResult = model.AwardResult;
 
             return View(selectedOperator);
         }
@@ -459,6 +463,33 @@ namespace OW.ApiSimulator.Controllers
             }
 
             return Ok(result);
+        }
+
+        [HttpPost]
+        public IActionResult Award([FromBody] AwardCall request, [FromRoute] string @operator)
+        {
+            var selectedOperator = GetOperator(@operator);
+            var result = selectedOperator.AwardResult;
+            var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId && x.SiteId == request.SiteId);
+            result.Seq = request.Seq;
+            result.ErrorCode = customer?.ErrorCode.Award ?? result.ErrorCode;
+            if (result.ErrorCode == 0)
+            {
+                result.PlayerId = request.PlayerId;
+                result.ErrorDescription = "Success";
+            }
+            else
+            {
+                result.ErrorDescription = "Unspecified Error";
+            }
+
+            sentryClient.CaptureMessage($"Api Award Simulator for Partner {@operator} player id: {request.PlayerId}", Sentry.Protocol.SentryLevel.Warning);
+
+            return Ok(new OWResponse<AwardResult>
+            {
+                TimeStamp = DateTimeOffset.UtcNow,
+                Result = result
+            });
         }
     }
 }

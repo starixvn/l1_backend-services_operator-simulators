@@ -51,5 +51,7 @@
         public int MemberLogin { get; set; } = 0;
 
         public int OWLogin { get; set; } = 0;
+
+        public int Award { get; set; } = 0;
     }
 }

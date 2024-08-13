@@ -22,6 +22,7 @@ namespace OW.ApiSimulator.Models
             CheckMaintenanceResult = new CheckMaintenanceResult { StartTime = DateTimeOffset.UtcNow, EndTime = DateTimeOffset.UtcNow.AddHours(1) };
             GetBetLimitResult = new GetBetLimitResult();
             HitJackpotResult = new HitJackpotResult();
+            AwardResult = new AwardResult();
         }
 
         public string Name { get; set; }
@@ -35,5 +36,6 @@ namespace OW.ApiSimulator.Models
         public CheckMaintenanceResult CheckMaintenanceResult { get; set; }
         public GetBetLimitResult GetBetLimitResult { get; set; }
         public HitJackpotResult HitJackpotResult { get; set; }
+        public AwardResult AwardResult { get; set; }
     }
 }
