@@ -4,7 +4,7 @@ namespace OW.ApiSimulator.Models
 {
     public static class Constants
     {
-        public static readonly string[] Operators = { "ow", "sbo", "ow_vg", "pff", "ONEworksSeal888", "sabaplay" };
+        public static readonly string[] Operators = { "ow", "sbo", "ow_vg", "pff", "ONEworksSeal888", "sabaplay", "sk" };
         public static readonly Dictionary<string, string> ForcedToUseOWOperatorsMapper = new Dictionary<string, string>{{ "ow_vg", "ow"}, { "ONEworksSeal888", "ow" } };
 
         public static readonly Dictionary<string, string> OperatorIds = new Dictionary<string,string>
@@ -22,5 +22,38 @@ namespace OW.ApiSimulator.Models
             {"th", "th-TH" },
             {"id", "id-ID" },
         };
+
+        public static string GetDefaultCurrency(string systemType)
+        {
+            return systemType switch
+            {
+                "SC1" => "$US",
+                "VG2" => "INH",
+                "GN" => "$US",
+                _ => "$US"
+            };
+        }
+
+        public static decimal GetDefaultMinBet(string systemType)
+        {
+            return systemType switch
+            {
+                "SC1" => 1,
+                "VG2" => 10,
+                "GN" => 1,
+                _ => 1
+            };
+        }
+
+        public static decimal GetDefaultMaxBet(string systemType)
+        {
+            return systemType switch
+            {
+                "SC1" => 3000,
+                "VG2" => 20000,
+                "GN" => 20000,
+                _ => 20000
+            };
+        }
     }    
 }
