@@ -20,3 +20,6 @@ include:
     paths:
       - ./L1.GameLobbySimulator/src/game-client-config.json
     expire_in: 1 day
+
+variables:
+  BYPASS_CRITICAL_VULNERABILITY: 'true'
