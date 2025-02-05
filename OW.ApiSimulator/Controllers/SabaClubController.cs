@@ -46,9 +46,9 @@ namespace OW.ApiSimulator.Controllers
                     PlayerId = memId,
                     Username = $"username_{memId}",
                     Balance = 2000,
-                    MinBet = (systemType.Equals(SC1) ? 1 : 10),
-                    MaxBet = (systemType.Equals(SC1) ? 3000 : 20000),
-                    Currency = (systemType.Equals(SC1) ? "$US" : "INH"),
+                    MinBet = Constants.GetDefaultMinBet(systemType),
+                    MaxBet = Constants.GetDefaultMaxBet(systemType),
+                    Currency = Constants.GetDefaultCurrency(systemType),
                     SiteId = siteId,
                 });
         }
@@ -90,11 +90,11 @@ namespace OW.ApiSimulator.Controllers
                     PlayerId = playerId,
                     Username = username,
                     Balance = 2000,
-                    MinBet = (systemType.Equals(SC1) ? 1 : 10),
-                    MaxBet = (systemType.Equals(SC1) ? 3000 : 20000),
+                    MinBet = Constants.GetDefaultMinBet(systemType),
+                    MaxBet = Constants.GetDefaultMaxBet(systemType),
                     SiteId = siteId
                 };
-            player.Currency = currency ?? (systemType.Equals(SC1) ? "$US" : "INH");
+            player.Currency = currency ?? Constants.GetDefaultCurrency(systemType);
             player.Username = username;
             player.Balance = balance;
             selectedOperator.Customers.RemoveAll(x => x.PlayerId == playerId && x.SiteId == siteId);
