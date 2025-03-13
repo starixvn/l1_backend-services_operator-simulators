@@ -15,7 +15,6 @@ namespace OW.ApiSimulator.Controllers
     [Route("{operator}/[controller]/[action]")]
     public class SabaClubController : Controller
     {
-        private const string SC1 = "SC1";
         private readonly IServiceProvider serviceProvider;
         private readonly IAppSettings appSettings;
         private readonly ISentryClient sentryClient;
@@ -49,9 +48,9 @@ namespace OW.ApiSimulator.Controllers
                     PlayerId = memId,
                     Username = $"username_{memId}",
                     Balance = 2000,
-                    MinBet = (systemType.Equals(SC1) ? 1 : 10),
-                    MaxBet = (systemType.Equals(SC1) ? 3000 : 20000),
-                    Currency = (systemType.Equals(SC1) ? "$US" : "INH"),
+                    MinBet = 1,
+                    MaxBet = 3000,
+                    Currency = "$US",
                     SiteId = siteId,
                 });
         }
@@ -93,11 +92,11 @@ namespace OW.ApiSimulator.Controllers
                     PlayerId = playerId,
                     Username = username,
                     Balance = 2000,
-                    MinBet = (systemType.Equals(SC1) ? 1 : 10),
-                    MaxBet = (systemType.Equals(SC1) ? 3000 : 20000),
+                    MinBet = 1,
+                    MaxBet = 3000,
                     SiteId = siteId
                 };
-            player.Currency = currency ?? (systemType.Equals(SC1) ? "$US" : "INH");
+            player.Currency = currency ?? "$US";
             player.Username = username;
             player.Balance = balance;
             selectedOperator.Customers.RemoveAll(x => x.PlayerId == playerId && x.SiteId == siteId);
