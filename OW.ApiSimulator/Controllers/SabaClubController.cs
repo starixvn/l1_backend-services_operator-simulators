@@ -162,7 +162,11 @@ namespace OW.ApiSimulator.Controllers
         public async Task<IActionResult> GetBalance([FromBody] GetBalanceCall request, [FromRoute] string @operator)
         {
             var selectedOperator = GetOperator(@operator);
+            Console.WriteLine(request.PlayerId);
+            Console.WriteLine(request.SiteId);
+            Console.WriteLine(selectedOperator.Customers.Count);
             var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId && x.SiteId == request.SiteId);
+            
 
             var result = new GetBalanceResult();
 
