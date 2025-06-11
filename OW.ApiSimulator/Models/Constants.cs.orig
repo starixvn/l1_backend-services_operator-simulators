@@ -10,7 +10,7 @@ namespace OW.ApiSimulator.Models
 
         public static readonly Dictionary<string, string> OperatorIds = new Dictionary<string,string>
         {
-            {"ow", "ONEworks1" },
+            {"ow", "SabaPlay_HD" },
             {"sbo", "ONEworksVGCash" }
         };
     }    
@@ -25,7 +25,7 @@ namespace OW.ApiSimulator.Models
 
         public static readonly Dictionary<string, string> OperatorIds = new Dictionary<string,string>
         {
-            {"ow", "ONEworks1" },
+            {"ow", "SabaPlay_HD" },
             {"sbo", "ONEworksVGCash" }
         };
 

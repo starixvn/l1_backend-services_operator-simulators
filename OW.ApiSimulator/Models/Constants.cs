@@ -5,11 +5,11 @@ namespace OW.ApiSimulator.Models
     public static class Constants
     {
         public static readonly string[] Operators = { "ow", "sbo", "ow_vg", "pff", "ONEworksSeal888", "sabaplay", "SabaPlay_HD" };
-        public static readonly Dictionary<string, string> ForcedToUseOWOperatorsMapper = new Dictionary<string, string>{{ "ow_vg", "ow"}, { "ONEworksSeal888", "ow" } };
+        public static readonly Dictionary<string, string> ForcedToUseOWOperatorsMapper = new Dictionary<string, string> { { "ow_vg", "ow" }, { "ONEworksSeal888", "ow" } };
 
-        public static readonly Dictionary<string, string> OperatorIds = new Dictionary<string,string>
+        public static readonly Dictionary<string, string> OperatorIds = new Dictionary<string, string>
         {
-            {"ow", "ONEworks1" },
+            {"ow", "SabaPlay_HD" },
             {"sbo", "ONEworksVGCash" }
         };
 
@@ -22,5 +22,5 @@ namespace OW.ApiSimulator.Models
             {"th", "th-TH" },
             {"id", "id-ID" },
         };
-    }    
+    }
 }
