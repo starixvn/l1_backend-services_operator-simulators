@@ -421,7 +421,7 @@ namespace OW.ApiSimulator.Controllers
 
                 var signInParams = new SingleSignOnParams(
                     Constants.OperatorIds["ow"],
-                    "d371cae6-ed52-49c6-9d7f-bae5d6fc5601",
+                    "SabaPlay_HD",
                     request.Call.SiteId,
                     request.Call.ObCustId,
                     request.Call.ObCustName,
