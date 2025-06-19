@@ -49,7 +49,7 @@ namespace OW.ApiSimulator.Controllers
                     Username = $"username_{memId}",
                     Balance = 2000,
                     MinBet = 1,
-                    MaxBet = 3000,
+                    MaxBet = 200000,
                     Currency = "$US",
                     SiteId = siteId,
                 });
@@ -93,7 +93,7 @@ namespace OW.ApiSimulator.Controllers
                     Username = username,
                     Balance = 2000,
                     MinBet = 1,
-                    MaxBet = 3000,
+                    MaxBet = 200000,
                     SiteId = siteId
                 };
             player.Currency = currency ?? "$US";
