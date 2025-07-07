@@ -2,7 +2,7 @@
 {
     public class AwardCall : OWCall
     {
-        public int PromotionId { get; set; }
+        public string PromotionId { get; set; }
 
         public int GameTypeId { get; set; }
 

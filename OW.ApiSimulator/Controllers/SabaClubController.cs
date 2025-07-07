@@ -260,7 +260,10 @@ namespace OW.ApiSimulator.Controllers
             if (result.ErrorCode == 0 && customer != null)
             {
                 result.PlayerId = request?.PlayerId;
-                customer.Balance += request.TotalWin;
+                if (string.IsNullOrWhiteSpace(request.PromotionId))
+                {
+                    customer.Balance += request.TotalWin;
+                }
             }
 
             await Task.Delay(delayTime);
@@ -472,10 +475,11 @@ namespace OW.ApiSimulator.Controllers
             var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId && x.SiteId == request.SiteId);
             result.Seq = request.Seq;
             result.ErrorCode = customer?.ErrorCode.Award ?? result.ErrorCode;
-            if (result.ErrorCode == 0)
+            if (result.ErrorCode == 0 && customer != null)
             {
                 result.PlayerId = request.PlayerId;
                 result.ErrorDescription = "Success";
+                customer.Balance += request.Amount;
             }
             else
             {

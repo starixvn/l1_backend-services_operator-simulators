@@ -13,5 +13,7 @@
         public string Currency { get; set; }
 
         public string Ip { get; set; }
+
+        public string PromotionId { get; set; }
     }
 }
