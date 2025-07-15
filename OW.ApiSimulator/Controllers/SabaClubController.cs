@@ -471,10 +471,10 @@ namespace OW.ApiSimulator.Controllers
         public IActionResult Award([FromBody] AwardCall request, [FromRoute] string @operator)
         {
             var selectedOperator = GetOperator(@operator);
-            var result = selectedOperator.AwardResult;
+            var result = new AwardResult();
             var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId && x.SiteId == request.SiteId);
             result.Seq = request.Seq;
-            result.ErrorCode = customer?.ErrorCode.Award ?? result.ErrorCode;
+            result.ErrorCode = customer?.ErrorCode.Award > 0 ? customer.ErrorCode.Award : selectedOperator.AwardResult.ErrorCode;
             if (result.ErrorCode == 0 && customer != null)
             {
                 result.PlayerId = request.PlayerId;
