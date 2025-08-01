@@ -82,6 +82,7 @@ namespace OW.ApiSimulator.Controllers
             [FromQuery] string currency,
             [FromQuery] string siteId,
             [FromQuery] int balance = 2000,
+            [FromQuery] int maxBet = 3000,
             [FromQuery] string systemType = "SC1")
         {
             var selectedOperator = GetOperator(@operator);
@@ -99,6 +100,7 @@ namespace OW.ApiSimulator.Controllers
             player.Currency = currency ?? "$US";
             player.Username = username;
             player.Balance = balance;
+            player.MaxBet = maxBet;
             selectedOperator.Customers.RemoveAll(x => x.PlayerId == playerId && x.SiteId == siteId);
             selectedOperator.Customers.Add(player);
 
