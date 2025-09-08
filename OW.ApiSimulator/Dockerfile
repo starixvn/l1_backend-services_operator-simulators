@@ -12,9 +12,9 @@ COPY ./OW.ApiSimulator .
 RUN dotnet publish -r linux-x64 --self-contained false -o /app 
 
 FROM hub.lumigame.com/base/dotnet/core/aspnet:3.1.32-alpine AS base
-# Update packages to fix security vulnerabilities
-RUN apk update && apk upgrade && apk add --no-cache curl
-RUN adduser ow_api_user --disabled-password
+# Update packages to fix security vulnerabilities and create user
+RUN apk update && apk upgrade && apk add --no-cache curl && \
+    adduser ow_api_user --disabled-password
 USER ow_api_user 
 WORKDIR /app
 COPY --from=builder /app .
