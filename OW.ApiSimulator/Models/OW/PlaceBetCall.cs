@@ -2,7 +2,7 @@
 {
     public class PlaceBetCall : OWCall
     {
-        public int GameRoundId { get; set; }
+        public long GameRoundId { get; set; }
 
         public int GameTypeId { get; set; }
 
