@@ -92,7 +92,7 @@ namespace OW.ApiSimulator.Controllers
                     PlayerId = playerId,
                     Username = username,
                     Balance = 2000,
-                    MinBet = 1,
+                    MinBet = 0.1m,
                     MaxBet = 3000,
                     SiteId = siteId
                 };
