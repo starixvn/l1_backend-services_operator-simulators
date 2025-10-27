@@ -241,8 +241,14 @@ namespace OW.ApiSimulator.Controllers
         private static int GetPlaceBetErrorCode(PlaceBetResult result, Customer customer, decimal amount)
         {
             var errorCode = customer?.ErrorCode.PlaceBet > 0 ? customer.ErrorCode.PlaceBet : result.ErrorCode;
+            if(customer == null)
+            {
+                const int errorPlayerNotFound = 4012;
+                return errorPlayerNotFound;
+            }
 
-            return (customer != null && amount > customer.Balance) ? 3002 : errorCode;
+            const int errorCodeInsuffientFunds = 3002;
+            return amount > customer.Balance ? errorCodeInsuffientFunds : errorCode;
         }
 
         [HttpPost]
