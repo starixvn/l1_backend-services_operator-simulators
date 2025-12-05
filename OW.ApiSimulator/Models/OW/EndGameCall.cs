@@ -12,6 +12,8 @@ namespace OW.ApiSimulator.Models.OW
 
         public decimal TotalWin { get; set; }
 
+        public decimal TotalBetAmount { get; set; }
+
         public decimal ValidBetAmount { get; set; }
 
         public DateTimeOffset EndTime { get; set; }

@@ -259,7 +259,7 @@ namespace OW.ApiSimulator.Controllers
             if (result.ErrorCode == 0 && customer != null)
             {
                 result.PlayerId = request?.PlayerId;
-                customer.Balance += request.TotalWin;
+                customer.Balance += (request.TotalWin - request.TotalBetAmount);
             }
 
             await Task.Delay(delayTime);
