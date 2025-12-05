@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using L1.Client;
 using Microsoft.AspNetCore.Mvc;
@@ -160,7 +161,7 @@ namespace OW.ApiSimulator.Controllers
 
         [HttpPost]
         public async Task<IActionResult> GetBalance([FromBody] GetBalanceCall request, [FromRoute] string @operator)
-        {
+        {   
             var selectedOperator = GetOperator(@operator);
             var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId && x.SiteId == request.SiteId);
 
@@ -181,6 +182,12 @@ namespace OW.ApiSimulator.Controllers
 
             var delayTime = customer?.Delay.GetBalance > 0 ? customer.Delay.GetBalance : resultTemplate.DelayTime;
             result.ErrorCode = customer?.ErrorCode.GetBalance > 0 ? customer.ErrorCode.GetBalance : resultTemplate.ErrorCode;
+
+            var logMessage = $"Balance After Get Balance for Partner {@operator}" +
+                $"\nBalance: {result.Balance}" +
+                $"\nrequest: {JsonSerializer.Serialize(request)}" +
+                $"\nresult: {JsonSerializer.Serialize(result)}";
+            sentryClient.CaptureMessage(logMessage);
 
             await Task.Delay(delayTime);
 
