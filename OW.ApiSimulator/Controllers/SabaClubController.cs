@@ -210,7 +210,6 @@ namespace OW.ApiSimulator.Controllers
 
                 if (request.Amount <= customer.Balance)
                 {
-                    customer.Balance -= request.Amount;
                     result.Balance = customer.Balance;
                 }
             }
